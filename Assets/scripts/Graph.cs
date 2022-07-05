@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    Transform pointPrefab;
+    [SerializeField]
+    int resolution;
+    void Awake()
     {
-        
-    }
+        Vector3 position = Vector3.zero;
+        var scale = Vector3.one / 5f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < resolution; i++)
+        {
+            Transform point = Instantiate(pointPrefab);
+            // f(x) = x
+            position.x = (i + 0.5f) / 5f - 1f;
+            position.y = position.x * position.x;
+            
+            point.localPosition = position;
+            point.localScale = scale;
+        }
     }
 }
